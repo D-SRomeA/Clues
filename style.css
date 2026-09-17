@@ -1,26 +1,37 @@
+/* Универсальная настройка модели размеров.
+border-box означает, что width и height включают:
+- внутренние отступы padding;
+- границы border.
+Это помогает избежать неожиданного расширения кнопок и блоков.*/
 * {
   box-sizing: border-box;
 }
-
+/*Базовое оформление страницы. margin: 0 убирает стандартные внешние отступы браузера.*/
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   color: #666;
   background: #fff;
 }
-
+/*Общий контейнер игры.
+width: min(100%, 700px):
+- на узком экране занимает всю доступную ширину;
+- на широком экране не становится шире 700px.
+margin: 0 auto центрирует блок по горизонтали.*/
 .clue-game {
   width: min(100%, 700px);
   margin: 0 auto;
   padding: 8px;
 }
-
+/* Оформление инструкции над игровой картинкой */
 .instruction {
   margin: 0 0 20px;
   font-size: 17px;
   line-height: 1.6;
 }
-
+/*Контейнер картинки и зон улик.
+position: relative создаёт точку отсчёта для улик: все элементы .clue с position: absolute будут позиционироваться относительно этой области.
+overflow: hidden не позволяет зонам выходить за границы картинки.*/
 .game-image {
   position: relative;
   width: 100%;
@@ -28,13 +39,17 @@ body {
   border-radius: 12px;
   background: #eee;
 }
-
+/*Картинка заполняет ширину контейнера и сохраняет свои исходные пропорции.*/
 .game-image img {
   display: block;
   width: 100%;
   height: auto;
 }
+/*Базовый стиль зоны улики.
 
+position: absolute позволяет разместить кнопку поверх изображения.
+Координаты left, top, width и height задаются в HTML.
+opacity: 0 скрывает зону до наведения, однако кнопка остаётся кликабельной.*/
 .clue {
   position: absolute;
   padding: 0;
@@ -49,7 +64,8 @@ body {
     background-color 0.2s ease;
 }
 
-/* Подсветка зоны при наведении */
+/*Показ зоны при наведении курсора.
+:focus-visible делает управление доступным с клавиатуры: пользователь нажимает Tab, и активная зона также подсвечивается.*/
 .clue:hover,
 .clue:focus-visible {
   opacity: 1;
@@ -58,7 +74,9 @@ body {
   outline: none;
 }
 
-/* Найденная зона */
+/*Стиль найденной улики.
+Класс .found добавляет JavaScript после правильного клика.
+Найденная зона остаётся видимой и становится зелёной.*/
 .clue.found {
   opacity: 1;
   border-color: #24b866;
@@ -66,7 +84,8 @@ body {
   cursor: default;
 }
 
-/* Внутренняя отметка */
+/* Галочка внутри найденной зоны.
+Псевдоэлемент ::after не требует добавлять отдельный HTML-элемент.*/
 .clue.found::after {
   content: "✓";
   position: absolute;
@@ -77,7 +96,7 @@ body {
   font-weight: bold;
   transform: translate(-50%, -50%);
 }
-
+/* Блок, где отображается число найденных улик */
 .game-status {
   margin-top: 28px;
   padding: 18px;
@@ -87,18 +106,18 @@ body {
   color: #444;
   font-size: 17px;
 }
-
+/* Выделяем число найденных улик оранжевым цветом */
 #foundCount {
   color: #e47a00;
 }
-
+/* Контейнер кнопок «Подсказка» и «Сбросить» */
 .game-controls {
   display: flex;
   justify-content: center;
   gap: 10px;
   margin-top: 24px;
 }
-
+/* Общие стили всех управляющих кнопок */
 .game-controls button {
   padding: 10px 18px;
   border: 2px solid;
@@ -108,17 +127,19 @@ body {
   font-weight: bold;
   cursor: pointer;
 }
-
+/* Индивидуальное оформление кнопки подсказки */
 .hint-button {
   border-color: #dc771e !important;
   color: #dc771e;
 }
-
+/* Индивидуальное оформление кнопки сброса */
 .reset-button {
   border-color: #28b86b !important;
   color: #28b86b;
 }
-
+/*
+Вид подсказки.
+JavaScript временно добавляет класс hint-visible к одной случайной, ещё не найденной зоне.*/
 .clue.hint-visible {
   opacity: 1;
   border-color: #ffc107;
@@ -126,6 +147,7 @@ body {
   animation: hintPulse 0.6s ease-in-out 3;
 }
 
+/* Анимация увеличения и возврата зоны для подсказки */
 @keyframes hintPulse {
   0%,
   100% {
@@ -136,11 +158,11 @@ body {
     transform: scale(1.08);
   }
 }
-
+/* Небольшой визуальный отклик при наведении на кнопку */
 .game-controls button:hover {
   filter: brightness(0.95);
 }
-
+/* Место для сообщений JavaScript: победа, отсутствие подсказок и т. д. */
 .message {
   min-height: 28px;
   margin-top: 16px;
@@ -148,7 +170,8 @@ body {
   font-weight: bold;
   text-align: center;
 }
-
+/*Адаптация интерфейса для узких экранов.
+flex-wrap: wrap переносит кнопки на новую строку, если они не помещаются по ширине*/
 @media (max-width: 500px) {
   .instruction {
     font-size: 15px;
@@ -163,7 +186,7 @@ body {
   }
 }
 
-/*временно выделить на картинке -- потом закоммитить
+/*Режим для наблюдения за расстановкой зон -- потом закоммитить
 .clue {
   opacity: 1;
   border: 2px dashed lime;

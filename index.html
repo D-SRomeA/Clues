@@ -1,22 +1,30 @@
 <!doctype html>
 <html lang="ru">
 <head>
+  <!-- Кодировка UTF-8 нужна для корректного отображения русского текста -->
   <meta charset="UTF-8">
+  <!-- Адаптация страницы под ширину экрана телефона или планшета -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <!-- Название вкладки браузера -->
   <title>Найди улики</title>
-
+  <!-- Подключаем внешний файл со стилями оформления и...-->
+  <!-- ... Подключаем JavaScript-логику игры.
+  Атрибут defer означает: сначала браузер построит HTML-страницу, затем выполнит script.js.
+  Поэтому JS уже сможет найти элементы страницы через querySelector. -->
   <link rel="stylesheet" href="./style.css">
   <script src="./script.js" defer></script>
 </head>
 
 <body>
+  <!-- Главный контейнер всей игры -->
   <main class="clue-game">
     <h1>Найди улики</h1>
-
+    <!-- Контейнер изображения.
+    Он нужен, чтобы расположить интерактивные зоны поверх картинки.
+    В CSS у него задан position: relative.-->
     <div class="game-image">
       <img src="./images/shop.jpg" alt="Магазин техники">
-
+  <!-- aria-label: описание для скринридеров и доступности.-->
       <button
         class="clue"
         data-id="1"
@@ -45,21 +53,25 @@
         aria-label="Улика 4">
       </button>                  
     </div>
+
+    <!--Блок статуса игры.
+    Значения внутри span изменяются JavaScript-кодом.-->
     <div class="game-status">
     🔍 Найдено: <span id="foundCount">0</span> из
     <span id="totalCount">4</span>
   </div>
-
+<!-- Контейнер управляющих кнопок -->
   <div class="game-controls">
+<!--Кнопка ПОДСКАЗКИ. id нужен JavaScript для назначения обработчика клика. class нужен CSS для оформления кнопки.-->
     <button id="hintButton" class="hint-button" type="button">
       💡 Подсказка (<span id="hintCount">3</span>)
     </button>
-
+<!--Кнопка СБРОСА возвращает игру к начальному состоянию: найденные улики очищаются, счётчик сбрасывается, а число подсказок снова становится равным трём.-->
     <button id="resetButton" class="reset-button" type="button">
       🔄 Сбросить
     </button>
   </div>
-
+<!--Здесь JavaScript выводит служебные сообщения: например, сообщение о победе или об окончании подсказок.-->
   <p id="message"></p>
   </main>
 </body>
