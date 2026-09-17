@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Найди улики</title>
+
+  <link rel="stylesheet" href="./style.css">
+  <script src="./script.js" defer></script>
+</head>
+
+<body>
+  <main class="clue-game">
+    <h1>Найди улики</h1>
+
+    <div class="game-image">
+      <img src="./images/shop.jpg" alt="Магазин техники">
+
+      <button
+        class="clue"
+        data-id="1"
+        style="left: 58%; top: 47%; width: 22%; height: 27%;"
+        aria-label="Улика 1">
+      </button>
+
+      <button
+        class="clue"
+        data-id="2"
+        style="left: 56%; top: 69%; width: 20%; height: 24%;"
+        aria-label="Улика 2">
+      </button>
+
+      <button
+        class="clue"
+        data-id="3"
+        style="left: 72%; top: 15%; width: 10%; height: 10%;"
+        aria-label="Улика 3">
+      </button>
+
+      <button
+        class="clue"
+        data-id="4"
+        style="left: 12%; top: 81%; width: 32%; height: 7%;"
+        aria-label="Улика 4">
+      </button>                  
+    </div>
+    <div class="game-status">
+    🔍 Найдено: <span id="foundCount">0</span> из
+    <span id="totalCount">4</span>
+  </div>
+
+  <div class="game-controls">
+    <button id="hintButton" class="hint-button" type="button">
+      💡 Подсказка (<span id="hintCount">3</span>)
+    </button>
+
+    <button id="resetButton" class="reset-button" type="button">
+      🔄 Сбросить
+    </button>
+  </div>
+
+  <p id="message"></p>
+  </main>
+</body>
+</html>

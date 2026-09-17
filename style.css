@@ -1,0 +1,171 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #666;
+  background: #fff;
+}
+
+.clue-game {
+  width: min(100%, 700px);
+  margin: 0 auto;
+  padding: 8px;
+}
+
+.instruction {
+  margin: 0 0 20px;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.game-image {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #eee;
+}
+
+.game-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.clue {
+  position: absolute;
+  padding: 0;
+  border: 3px solid transparent;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+/* Подсветка зоны при наведении */
+.clue:hover,
+.clue:focus-visible {
+  opacity: 1;
+  border-color: #ff4c55;
+  background: rgba(255, 70, 70, 0.18);
+  outline: none;
+}
+
+/* Найденная зона */
+.clue.found {
+  opacity: 1;
+  border-color: #24b866;
+  background: rgba(36, 184, 102, 0.2);
+  cursor: default;
+}
+
+/* Внутренняя отметка */
+.clue.found::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: #fff;
+  font-size: 22px;
+  font-weight: bold;
+  transform: translate(-50%, -50%);
+}
+
+.game-status {
+  margin-top: 28px;
+  padding: 18px;
+  border: 1px solid #e1e5e8;
+  border-radius: 12px;
+  background: #fafbfc;
+  color: #444;
+  font-size: 17px;
+}
+
+#foundCount {
+  color: #e47a00;
+}
+
+.game-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.game-controls button {
+  padding: 10px 18px;
+  border: 2px solid;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.hint-button {
+  border-color: #dc771e !important;
+  color: #dc771e;
+}
+
+.reset-button {
+  border-color: #28b86b !important;
+  color: #28b86b;
+}
+
+.clue.hint-visible {
+  opacity: 1;
+  border-color: #ffc107;
+  background: rgba(255, 193, 7, 0.3);
+  animation: hintPulse 0.6s ease-in-out 3;
+}
+
+@keyframes hintPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+.game-controls button:hover {
+  filter: brightness(0.95);
+}
+
+.message {
+  min-height: 28px;
+  margin-top: 16px;
+  color: #259657;
+  font-weight: bold;
+  text-align: center;
+}
+
+@media (max-width: 500px) {
+  .instruction {
+    font-size: 15px;
+  }
+
+  .game-controls {
+    flex-wrap: wrap;
+  }
+
+  .game-controls button {
+    font-size: 14px;
+  }
+}
+
+/*временно выделить на картинке -- потом закоммитить
+.clue {
+  opacity: 1;
+  border: 2px dashed lime;
+  background: rgba(0, 255, 0, 0.2);
+}*/
